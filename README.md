@@ -10,3 +10,4 @@ ___
 ___
 ## Ссылки
 ###### API сервиса - https://api.moview.students.nomoreparties.co
+###### IP - 51.250.66.186

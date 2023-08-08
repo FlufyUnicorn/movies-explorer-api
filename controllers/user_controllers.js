@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const BadRequestError = require('../utils/errors/badRequestError');
-const { NOT_FOUND_ERROR_CODE, USER_NOT_FOUND } = require('../utils/constants');
+const { NOT_FOUND_ERROR_CODE, USER_NOT_FOUND, INCORRECT_DATA_EDIT_PROFILE } = require('../utils/constants');
 
 const updateProfile = (req, res, next) => {
   const { name, email } = req.body;
@@ -15,7 +15,7 @@ const updateProfile = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError(err.message));
+        next(new BadRequestError(INCORRECT_DATA_EDIT_PROFILE));
       } else {
         next(err);
       }

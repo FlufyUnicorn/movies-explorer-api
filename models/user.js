@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const UnauthorizedError = require('../utils/errors/unauthorizedError');
-const { INCORRECT_EMAIL_OR_PASS, EMAIL_ERROR } = require('../utils/constants');
+const { INCORRECT_EMAIL_OR_PASS, EMAIL_INCORRECT } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: validator.isEmail,
-      message: EMAIL_ERROR,
+      message: EMAIL_INCORRECT,
     },
   },
   password: {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
     maxlength: 30,
-  }
+  },
 });
 
 userSchema.statics.checkUser = function (email, password) {
@@ -42,7 +42,7 @@ userSchema.statics.checkUser = function (email, password) {
         })
         .catch((e) => {
           console.log(e);
-        })
+        });
     });
 };
 

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const ConflictError = require('../utils/errors/ConflictError');
 const User = require('../models/user');
-const { SUCCESS_CREATED_CODE, EMAIL_ALREADY_EXISTS, REGISTER_INCORRECT_DATA } = require('../utils/constants');
+const { SUCCESS_CREATED_CODE, EMAIL_EXISTS, REG_INCORRECT } = require('../utils/constants');
 const BadRequestError = require('../utils/errors/badRequestError');
 const { getJWT } = require('../utils/getJWT');
 
@@ -22,7 +22,6 @@ const createUser = (req, res, next) => {
   const {
     name, email, password,
   } = req.body;
-
   bcrypt.hash(password, 10)
     .then((hash) => User.create(
       {
@@ -36,9 +35,9 @@ const createUser = (req, res, next) => {
       })
       .catch((err) => {
         if (err.code === 11000) {
-          next(new ConflictError(EMAIL_ALREADY_EXISTS));
+          next(new ConflictError(EMAIL_EXISTS));
         } else if (err.name === 'ValidationError') {
-          next(new BadRequestError(REGISTER_INCORRECT_DATA));
+          next(new BadRequestError(REG_INCORRECT));
         } else {
           next(err);
         }

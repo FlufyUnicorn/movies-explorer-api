@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const URL_ERROR = require('../utils/constants');
+const URL_INCORRECT = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema({
           require_protocol: true,
         },
       ),
-      message: URL_ERROR,
+      message: URL_INCORRECT,
     },
   },
   trailerLink: {
@@ -50,7 +50,7 @@ const movieSchema = new mongoose.Schema({
           require_protocol: true,
         },
       ),
-      message: URL_ERROR,
+      message: URL_INCORRECT,
     },
   },
   thumbnail: {
@@ -65,13 +65,13 @@ const movieSchema = new mongoose.Schema({
           require_protocol: true,
         },
       ),
-      message: URL_ERROR,
+      message: URL_INCORRECT,
     },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'user'
+    ref: 'user',
   },
   movieId: {
     type: Number,
@@ -84,7 +84,7 @@ const movieSchema = new mongoose.Schema({
   nameEN: {
     type: String,
     required: true,
-  }
+  },
 });
 
 module.exports = mongoose.model('movie', movieSchema);
