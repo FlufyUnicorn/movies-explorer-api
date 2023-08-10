@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const ConflictError = require('../utils/errors/ConflictError');
 const User = require('../models/user');
 const { SUCCESS_CREATED_CODE, EMAIL_EXISTS, REG_INCORRECT } = require('../utils/constants');
 const BadRequestError = require('../utils/errors/badRequestError');
+const ConflictError = require('../utils/errors/ConflictError');
 const { getJWT } = require('../utils/getJWT');
 
 const login = (req, res, next) => {
